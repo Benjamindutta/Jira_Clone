@@ -45,7 +45,7 @@ body{
     height: 1.3rem;
     width: 2.5rem;
     border-radius: 2px;
-    background-color: lightblue;
+    background-color: black;
 }
 .lightpink{
     background-color: lightpink;
@@ -58,4 +58,12 @@ body{
 }
 .black{
     background-color: black;
+}
+.modal-cont{
+    height:50vh;
+    width: 45vw;
+    position: absolute;
+    top:calc((100vh - 50vh) / 2);
+    left:calc( (100vw - 45vw) / 2);
+    background-color: lightblue;
 }
