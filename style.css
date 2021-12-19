@@ -60,10 +60,66 @@ body{
     background-color: black;
 }
 .modal-cont{
+    border-radius: 4px;
     height:50vh;
     width: 45vw;
     position: absolute;
+    display: none;
     top:calc((100vh - 50vh) / 2);
     left:calc( (100vw - 45vw) / 2);
-    background-color: lightblue;
+    
+}
+.priority-color-cont{
+    height:100%;
+    width:25%;
+    background-color:#2C3A47;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 3px ;
+}
+.text-area-cont{
+    padding: 5%;
+    background-color: #f1f2f6;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    resize: none;
+    height: 100%;
+    width: 75%;
+}
+.priority-color{
+    height: 15%;
+    border-radius: 2px;
+    width: 65%;
+}
+.border{
+    border:2px solid red;
+}
+.main-cont{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2rem;
+    gap: 2rem;
+}
+.ticket-cont{
+    height: 11rem;
+    /* width: */
+    background-color: #F8EFBA;
+    width: 16rem;
+}
+.ticket-color{
+    height:1rem;
+    background-color: black;
+}
+.ticket-id{
+    height:2rem;
+    padding: .2rem;
+    background-color: #F8EFBA;
+}
+.task-area{
+    padding: .2rem;
+    height: calc( (100%-1rem-2rem));
 }
