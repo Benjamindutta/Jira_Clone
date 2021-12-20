@@ -95,7 +95,7 @@ body{
     width: 65%;
 }
 .border{
-    border:2px solid red;
+    border:2.5px solid red;
 }
 .main-cont{
     display: flex;
@@ -103,23 +103,36 @@ body{
     justify-content: center;
     margin: 2rem;
     gap: 2rem;
+    
 }
 .ticket-cont{
-    height: 11rem;
+    height: 12rem;
     /* width: */
-    background-color: #F8EFBA;
-    width: 16rem;
+    background-color: #ecf0f1;
+    width: 15rem;
+    bottom: 2rem;
 }
 .ticket-color{
     height:1rem;
-    background-color: black;
 }
 .ticket-id{
     height:2rem;
-    padding: .2rem;
-    background-color: #F8EFBA;
+    padding: .3rem;
+    font-family:Comic Sans MS, Comic Sans, cursive ;
+    background-color: #ecf0f1;
 }
 .task-area{
-    padding: .2rem;
-    height: calc( (100%-1rem-2rem));
+    padding:.3rem;
+    font-family: Bradley Hand, cursive;
+    outline: none;
+    height: calc( ( 100% - 1rem - 2rem ) );
+}
+.lock{
+    height: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    background-color:#ecf0f1 ;
+    font-size: 1.5rem;
+    color: #c8d6e5;
+    padding-right: 1rem;
 }
