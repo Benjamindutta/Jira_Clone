@@ -17,6 +17,14 @@ let ticketArr = [];
 let lockedIcon = "fa-lock";
 let unlockedIcon = "fa-unlock";
 
+//jira_ticket is available in local storage
+if (localStorage.getItem("jira_ticket")) {
+    ticketArr = JSON.parse(localStorage.getItem("jira_ticket"));
+    ticketArr.forEach((ticketObj) => {
+        createTicket(ticketObj.ticketColor, ticketObj.ticketTask, ticketObj.ticketId);
+    });
+}
+
 //for colors in the toolbar
 for (let i = 0; i < toolboxColor.length; i++) {
     let currentToolboxcolor;
@@ -113,6 +121,7 @@ function createTicket(ticketColor, ticketTask, ticketId) {
             </div>`;
     if (!ticketId) {
         ticketArr.push({ ticketColor, ticketTask, ticketId: id })
+        localStorage.setItem("jira_ticket", JSON.stringify(ticketArr));
     }
     mainCont.appendChild(ticketContainer);
     //handle remove is handled
@@ -123,7 +132,13 @@ function createTicket(ticketColor, ticketTask, ticketId) {
 
 //function for handling remove
 function handleRemove(ticket) {
-    if (removeFlag) ticket.remove();
+    ticket.addEventListener('click', (e) => {
+        if (!removeFlag) { return; }
+        let currentIndex = getIndexOf(ticket);
+        ticketArr.splice(currentIndex, 1);
+        localStorage.setItem("jira_ticket", JSON.stringify(ticketArr));
+        ticket.remove();
+    })
 }
 
 function handleLock(ticket) {
@@ -140,18 +155,20 @@ function handleLock(ticket) {
             ticketLock.classList.add(lockedIcon)
             taskArea.setAttribute("contenteditable", false);
         }
+        let currentIndex = getIndexOf(ticket);
+        ticketArr[currentIndex].ticketTask = taskArea.innerText;
+        console.log(taskArea.innerText);
+        localStorage.setItem("jira_ticket", JSON.stringify(ticketArr));
     })
 }
 
 //function for handling in change in color bar of the ticket 
 function handleColor(ticket) {
     let colorBar = ticket.querySelector(".ticket-color");
-    let idBar = ticket.querySelector(".ticket-id")
 
     colorBar.addEventListener('click', (e) => {
         let currentColor = colorBar.classList[1];
-        let currentId = idBar.innerText.slice(1);
-        console.log(currentId);
+
         let indexOfColor = colors.findIndex((color) => {
             return color === currentColor;
         })
@@ -159,14 +176,21 @@ function handleColor(ticket) {
 
         indexOfColor = (indexOfColor + 1) % colors.length;
         colorBar.classList.remove(currentColor);
-        ticketArr.forEach((ticketObj) => {
-            if (ticketObj.ticketId === currentId) {
-                ticketObj.ticketColor = colors[indexOfColor];
-            }
-        })
+        let currentIndex = getIndexOf(ticket);
+        ticketArr[currentIndex].ticketColor = colors[indexOfColor];
+        localStorage.setItem("jira_ticket", JSON.stringify(ticketArr));
         colorBar.classList.add(colors[indexOfColor]);
 
     })
 
 
+}
+
+function getIndexOf(ticket) {
+    let idBar = ticket.querySelector(".ticket-id")
+    let currentId = idBar.innerText.slice(1);
+    let index = ticketArr.findIndex((ticketObj) => {
+        return currentId === ticketObj.ticketId;
+    })
+    return index;
 }
